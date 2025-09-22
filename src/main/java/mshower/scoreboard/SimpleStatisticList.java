@@ -40,9 +40,8 @@ public class SimpleStatisticList implements ModInitializer
     public static final String MOD_ID = "simple-statistic-list";
     public static String MOD_VERSION = "1.0.0";
     public static String MOD_NAME = "Simple Statistic List";
-    public static Scoreboard MiningScoreboard;
+    public static Scoreboard StatisticListScoreboard;
     public static ScoreboardObjective MiningScoreboardObj;
-    public static Scoreboard PlacingScoreboard;
     public static ScoreboardObjective PlacingScoreboardObj;
 
     @Override

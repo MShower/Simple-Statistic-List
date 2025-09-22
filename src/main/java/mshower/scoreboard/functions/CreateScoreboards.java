@@ -19,9 +19,8 @@ import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.server.world.ServerWorld;
 import java.util.Objects;
 
-import static mshower.scoreboard.SimpleStatisticList.MiningScoreboard;
+import static mshower.scoreboard.SimpleStatisticList.StatisticListScoreboard;
 import static mshower.scoreboard.SimpleStatisticList.MiningScoreboardObj;
-import static mshower.scoreboard.SimpleStatisticList.PlacingScoreboard;
 import static mshower.scoreboard.SimpleStatisticList.PlacingScoreboardObj;
 
 public class CreateScoreboards {
@@ -33,21 +32,21 @@ public class CreateScoreboards {
             //#else
             //$$ overworld = server.getWorld(World.OVERWORLD);
             //#endif
-            MiningScoreboard = Objects.requireNonNull(overworld).getScoreboard();
-            MiningScoreboardObj = MiningScoreboard.getNullableObjective(mining_name);
+            StatisticListScoreboard = Objects.requireNonNull(overworld).getScoreboard();
+            MiningScoreboardObj = StatisticListScoreboard.getNullableObjective(mining_name);
             if (MiningScoreboardObj == null) {
                 //#if MC<11900
-                MiningScoreboardObj = MiningScoreboard.addObjective(mining_name, ScoreboardCriterion.DUMMY, new LiteralText(mining_display_name), ScoreboardCriterion.RenderType.INTEGER);
+                MiningScoreboardObj = StatisticListScoreboard.addObjective(mining_name, ScoreboardCriterion.DUMMY, new LiteralText(mining_display_name), ScoreboardCriterion.RenderType.INTEGER);
                 //#elseif MC>=11900 && MC<12003
-                //$$ MiningScoreboardObj = MiningScoreboard.addObjective(mining_name, ScoreboardCriterion.DUMMY, Text.literal(mining_display_name), ScoreboardCriterion.RenderType.INTEGER);
+                //$$ MiningScoreboardObj = StatisticListScoreboard.addObjective(mining_name, ScoreboardCriterion.DUMMY, Text.literal(mining_display_name), ScoreboardCriterion.RenderType.INTEGER);
                 //#elseif MC>=12003
-                //$$MiningScoreboardObj = MiningScoreboard.addObjective(mining_name, ScoreboardCriterion.DUMMY, Text.literal(mining_display_name), ScoreboardCriterion.RenderType.INTEGER, true, null);
+                //$$MiningScoreboardObj = StatisticListScoreboard.addObjective(mining_name, ScoreboardCriterion.DUMMY, Text.literal(mining_display_name), ScoreboardCriterion.RenderType.INTEGER, true, null);
                 //#endif
 
                 //#if MC<12002
-                MiningScoreboard.setObjectiveSlot(1, null);
+                StatisticListScoreboard.setObjectiveSlot(1, null);
                 //#else
-                //$$ MiningScoreboard.setObjectiveSlot(ScoreboardDisplaySlot.SIDEBAR, null);
+                //$$ StatisticListScoreboard.setObjectiveSlot(ScoreboardDisplaySlot.SIDEBAR, null);
                 //#endif
             }else{
                 //#if MC<11900
@@ -56,27 +55,19 @@ public class CreateScoreboards {
                 //$$ MiningScoreboardObj.setDisplayName(Text.literal(mining_display_name));
                 //#endif
             }
-        });
-        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-            ServerWorld overworld;
-            //#if MC < 11900
-            overworld = server.getWorld(DimensionType.OVERWORLD);
-            //#else
-            //$$ overworld = server.getWorld(World.OVERWORLD);
-            //#endif
-            PlacingScoreboard = Objects.requireNonNull(overworld).getScoreboard();
-            PlacingScoreboardObj = PlacingScoreboard.getNullableObjective(placing_name);
+
+            PlacingScoreboardObj = StatisticListScoreboard.getNullableObjective(placing_name);
             if (PlacingScoreboardObj == null) {
                 //#if MC<11900
-                PlacingScoreboardObj = MiningScoreboard.addObjective(placing_name, ScoreboardCriterion.DUMMY, new LiteralText(placing_display_name), ScoreboardCriterion.RenderType.INTEGER);
+                PlacingScoreboardObj = StatisticListScoreboard.addObjective(placing_name, ScoreboardCriterion.DUMMY, new LiteralText(placing_display_name), ScoreboardCriterion.RenderType.INTEGER);
                 //#elseif MC>=11900 && MC<12003
-                //$$ PlacingScoreboardObj = MiningScoreboard.addObjective(placing_name, ScoreboardCriterion.DUMMY, Text.literal(placing_display_name), ScoreboardCriterion.RenderType.INTEGER);
+                //$$ PlacingScoreboardObj = StatisticListScoreboard.addObjective(placing_name, ScoreboardCriterion.DUMMY, Text.literal(placing_display_name), ScoreboardCriterion.RenderType.INTEGER);
                 //#elseif MC>=12003
-                //$$PlacingScoreboardObj = MiningScoreboard.addObjective(placing_name, ScoreboardCriterion.DUMMY, Text.literal(placing_display_name), ScoreboardCriterion.RenderType.INTEGER, true, null);
+                //$$PlacingScoreboardObj = StatisticListScoreboard.addObjective(placing_name, ScoreboardCriterion.DUMMY, Text.literal(placing_display_name), ScoreboardCriterion.RenderType.INTEGER, true, null);
                 //#endif
 
                 //#if MC<12002
-                PlacingScoreboard.setObjectiveSlot(1, null);
+                StatisticListScoreboard.setObjectiveSlot(1, null);
                 //#else
                 //$$ PlacingScoreboard.setObjectiveSlot(ScoreboardDisplaySlot.SIDEBAR, null);
                 //#endif
