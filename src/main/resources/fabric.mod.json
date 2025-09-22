@@ -1,32 +1,33 @@
 {
-  "schemaVersion": 1,
-  "id": "${id}",
-  "version": "${version}",
+    "schemaVersion": 1,
+    "id": "${id}",
+    "version": "${version}",
 
-  "name": "${name}",
-  "description": "Template mod created by Fallen_Breath",
-  "authors": [
-    "MeteorOfTime"
-  ],
-  "contact": {
-    "homepage": "",
-    "sources": ""
-  },
+    "name": "${name}",
+    "description": "Provide simple scoreboard presets.",
+    "authors": [
+        "MeteorOfTime"
+    ],
+    "contact": {
+        "homepage": "",
+        "sources": ""
+    },
 
-  "icon": "assets/simple-statistic-list/icon.png",
+    "icon": "assets/simple-statistic-list/icon.png",
 
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "mshower.scoreboard.SimpleStatisticList"
-    ]
-  },
-  "mixins": [
-    "simple-statistic-list.mixins.json"
-  ],
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "mshower.scoreboard.SimpleStatisticList"
+        ]
+    },
+    "mixins": [
+        "simple-statistic-list.mixins.json"
+    ],
 
-  "depends": {
-    "fabricloader": ">=0.11.4",
-    "minecraft": "${minecraft_dependency}"
-  }
+    "depends": {
+        "fabricloader": ">=0.11.4",
+        "fabric-api": "*",
+        "minecraft": "${minecraft_dependency}"
+    }
 }
