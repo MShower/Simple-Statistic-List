@@ -1,7 +1,15 @@
 package mshower.scoreboard;
 
+import mshower.scoreboard.commands.SimpleStatisticListCommand;
 import mshower.scoreboard.config.ScoreboardConfig;
+import mshower.scoreboard.event.HookPlayerBreakBlockEvent;
+import mshower.scoreboard.functions.CreateScoreboards;
 import net.fabricmc.api.ModInitializer;
+//#if MC < 11900
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+//#else
+//$$ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+//#endif
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 
@@ -13,20 +21,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 //#endif
 
-//#if MC>=12003
 import net.minecraft.scoreboard.*;
-//#else
-//$$ import net.minecraft.scoreboard.ScoreboardPlayerScore;
-//#endif
 
 //#if MC >= 11900
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import org.spongepowered.asm.mixin.transformer.Config;
-
-import java.io.File;
-//#else
-//$$ import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 //#endif
+import java.io.File;
 
 public class SimpleStatisticList implements ModInitializer
 {
@@ -53,6 +53,21 @@ public class SimpleStatisticList implements ModInitializer
         FabricLoader loader = FabricLoader.getInstance();
         File config_file_path = loader.getConfigDir().toFile();
         ScoreboardConfig config = new ScoreboardConfig(config_file_path.getPath());
+        String miningListDisplayName = config.GetValue("MiningListDisplayName");
+        String placingListDisplayName = config.GetValue("PlacingListDisplayName");
+        String miningListName = config.GetValue("MiningListName");
+        String placingListName = config.GetValue("PlacingListName");
+        HookPlayerBreakBlockEvent.hook();
+        SimpleStatisticListCommand.Config = new ScoreboardConfig(config_file_path.getPath());
+        CreateScoreboards.create(miningListName,placingListName,miningListDisplayName,placingListDisplayName);
+
+        //#if MC<11900
+        // 注册命令以切换计分板的可见/隐藏状态
+        net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> SimpleStatisticListCommand.register(dispatcher));
+        //#else
+        //$$ CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> SimpleStatisticListCommand.register(dispatcher));
+        //#endif
+        SimpleStatisticListMod.init();
 
         LOGGER.info("Simple Statistic List Loaded.");
     }

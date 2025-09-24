@@ -4,7 +4,6 @@
   "package": "mshower.scoreboard.mixins",
   "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
   "mixins": [
-    "MinecraftServerMixin"
   ],
   "client": [
   ],

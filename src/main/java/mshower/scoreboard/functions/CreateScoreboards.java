@@ -13,10 +13,11 @@ import net.minecraft.text.LiteralText;
 //$$import net.minecraft.text.Text;
 //#endif
 
-//if MC<11900
+//#if MC<11900
 import net.minecraft.world.dimension.DimensionType;
 //#endif
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.World;
 import java.util.Objects;
 
 import static mshower.scoreboard.SimpleStatisticList.StatisticListScoreboard;
@@ -27,7 +28,7 @@ public class CreateScoreboards {
     public static void create(final String mining_name, final String placing_name, final String mining_display_name, final String placing_display_name) {
         ServerLifecycleEvents.SERVER_STARTED.register(server -> {
             ServerWorld overworld;
-            //#if MC < 11900
+            //#if MC < 11600
             overworld = server.getWorld(DimensionType.OVERWORLD);
             //#else
             //$$ overworld = server.getWorld(World.OVERWORLD);
@@ -69,7 +70,7 @@ public class CreateScoreboards {
                 //#if MC<12002
                 StatisticListScoreboard.setObjectiveSlot(1, null);
                 //#else
-                //$$ PlacingScoreboard.setObjectiveSlot(ScoreboardDisplaySlot.SIDEBAR, null);
+                //$$ StatisticListScoreboard.setObjectiveSlot(ScoreboardDisplaySlot.SIDEBAR, null);
                 //#endif
             }else{
                 //#if MC<11900

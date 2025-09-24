@@ -17,12 +17,11 @@ import static mshower.scoreboard.SimpleStatisticList.*;
 public class HookPlayerBreakBlockEvent {
     public static void hook() {
         PlayerBlockBreakEvents.AFTER.register(((world, player, pos, state, blockEntity) -> {
-
             //#if MC < 12003
-            ScoreboardPlayerScore score = StatisticListScoreboard.getPlayerScore(player.getName().getString(), MiningScoreboardObj);//获取玩家计分对象
-            int player_score = score.getScore();//获取玩家当前的计分数
-            player_score++;//分数递增
-            score.setScore(player_score);//更新玩家的分数
+            ScoreboardPlayerScore score = StatisticListScoreboard.getPlayerScore(player.getName().getString(), MiningScoreboardObj);
+            int player_score = score.getScore();
+            player_score++;
+            score.setScore(player_score);
             //#else
             //$$ ScoreAccess access = StatisticListScoreboard.getOrCreateScore(player, MiningScoreboardObj);
             //$$ int score = access.getScore();

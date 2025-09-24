@@ -3,6 +3,9 @@ package mshower.scoreboard.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import mshower.scoreboard.config.ScoreboardConfig;
 import net.minecraft.network.packet.s2c.play.ScoreboardDisplayS2CPacket;
+//#if MC>=12001
+import net.minecraft.scoreboard.ScoreboardDisplaySlot;
+//#endif
 import net.minecraft.scoreboard.ScoreboardObjective;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -146,5 +149,26 @@ public class SimpleStatisticListCommand {
 
     public static void refreshDisplayModeFromConfig() {
         globalScoreboardDisplayMode = Config.GetValue("DisplayMode");
+    }
+
+    public static void onServerStarted() {
+        switch (globalScoreboardDisplayMode) {
+            case "Mining":
+                multiMiningOrPlacing(MiningScoreboardObj);
+                break;
+            case "Placing":
+                multiMiningOrPlacing(PlacingScoreboardObj);
+                break;
+            case "Off":
+                //#if MC<12002
+                StatisticListScoreboard.setObjectiveSlot(1, null);
+                //#else
+                //$$ StatisticListScoreboard.setObjectiveSlot(ScoreboardDisplaySlot.SIDEBAR, null);
+                //#endif
+                break;
+            case "Cycle":
+                //TODO
+                break;
+        }
     }
 }
