@@ -3,7 +3,7 @@ package mshower.scoreboard.functions;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 
 //#if MC>=12002
-import net.minecraft.scoreboard.ScoreboardDisplaySlot;
+//$$ import net.minecraft.scoreboard.ScoreboardDisplaySlot;
 //#endif
 
 import net.minecraft.scoreboard.ScoreboardCriterion;

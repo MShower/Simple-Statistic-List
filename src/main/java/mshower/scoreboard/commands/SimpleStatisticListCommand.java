@@ -3,8 +3,8 @@ package mshower.scoreboard.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import mshower.scoreboard.config.ScoreboardConfig;
 import net.minecraft.network.packet.s2c.play.ScoreboardDisplayS2CPacket;
-//#if MC>=12001
-import net.minecraft.scoreboard.ScoreboardDisplaySlot;
+//#if MC>=12002
+//$$ import net.minecraft.scoreboard.ScoreboardDisplaySlot;
 //#endif
 import net.minecraft.scoreboard.ScoreboardObjective;
 import net.minecraft.server.command.ServerCommandSource;
