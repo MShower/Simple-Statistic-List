@@ -7,6 +7,7 @@ import net.minecraft.server.MinecraftServer;
 import java.io.IOException;
 
 import static mshower.scoreboard.SimpleStatisticList.MiningScoreboardObj;
+import static mshower.scoreboard.SimpleStatisticList.PlacingScoreboardObj;
 import static mshower.scoreboard.commands.SimpleStatisticListCommand.Config;
 
 public class SimpleStatisticListMod {
@@ -19,5 +20,6 @@ public class SimpleStatisticListMod {
         SimpleStatisticList.LOGGER.info("Simple Statistic List Loaded!");
         System.out.println("Config = " + Config);
         System.out.println("MiningScoreboardObj = " + MiningScoreboardObj);
+        System.out.println("PlacingScoreboardObj = " + PlacingScoreboardObj);
     }
 }

@@ -3,6 +3,7 @@ package mshower.scoreboard;
 import mshower.scoreboard.commands.SimpleStatisticListCommand;
 import mshower.scoreboard.config.ScoreboardConfig;
 import mshower.scoreboard.event.HookPlayerBreakBlockEvent;
+import mshower.scoreboard.event.HookPlayerPlaceBlockEvent;
 import mshower.scoreboard.functions.CreateScoreboards;
 import net.fabricmc.api.ModInitializer;
 //#if MC < 11900
@@ -58,6 +59,7 @@ public class SimpleStatisticList implements ModInitializer
         String miningListName = config.GetValue("MiningListName");
         String placingListName = config.GetValue("PlacingListName");
         HookPlayerBreakBlockEvent.hook();
+        HookPlayerPlaceBlockEvent.hook();
         SimpleStatisticListCommand.Config = new ScoreboardConfig(config_file_path.getPath());
         CreateScoreboards.create(miningListName,placingListName,miningListDisplayName,placingListDisplayName);
 
