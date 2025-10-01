@@ -1,6 +1,7 @@
 package mshower.scoreboard.config;
 
 import mshower.scoreboard.SimpleStatisticList;
+import org.lwjgl.system.CallbackI;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -13,16 +14,23 @@ public class ScoreboardConfig {
     File file;
     public Properties ScoreboardProperties;
 
-    private void CreateDefaultConfigFile(File file) {
+    private void CreateDefaultConfigFile(File file,
+                                         String MiningListDisplayName,
+                                         String PlacingListDisplayName,
+                                         String MiningListName,
+                                         String PlacingListName,
+                                         String DisplayMode,
+                                         Integer CycleDelay
+    ) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file)))
         {
             String DEFAULT_CONFIG_DATA =
-                    "MiningListDisplayName = MiningList\n" +
-                            "PlacingListDisplayName = PlacingList\n"+
-                            "MiningListName = MiningList\n"+
-                            "PlacingListName = PlacingList\n"+
-                            "DisplayMode = Cycle\n"+ //Mining Placing Off Cycle
-                            "CycleDelay = 1200";
+                    "MiningListDisplayName = " + MiningListDisplayName +
+                            "\nPlacingListDisplayName = " + PlacingListDisplayName +
+                            "\nMiningListName = " + MiningListName +
+                            "\nPlacingListName = " + PlacingListName +
+                            "\nDisplayMode = " + DisplayMode +//Mining Placing Off Cycle
+                            "\nCycleDelay = " + CycleDelay;
             writer.write(DEFAULT_CONFIG_DATA);
         } catch (Exception e) {
             SimpleStatisticList.LOGGER.warn("ERROR OCCURRED WHILE WRITING CONFIG.");
@@ -33,7 +41,7 @@ public class ScoreboardConfig {
         if (!file.exists())
         {
             try {
-                CreateDefaultConfigFile(file);
+                CreateDefaultConfigFile(file, "MiningList", "PlacingList", "MiningList", "PlacingList", "Cycle", 1200);
             } catch (Exception e) {
                 SimpleStatisticList.LOGGER.warn("ERROR OCCURRED WHILE CREATING CONFIG.");
             }
@@ -56,5 +64,9 @@ public class ScoreboardConfig {
     public void UpdateValue(final String key, final String val) throws IOException {
         this.ScoreboardProperties.setProperty(key, val);
         this.ScoreboardProperties.store(Files.newOutputStream(this.file.toPath()), null);
+    }
+
+    public static void UpdateConfig() {
+        //TODO
     }
 }
