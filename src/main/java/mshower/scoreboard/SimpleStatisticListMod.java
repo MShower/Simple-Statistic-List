@@ -1,14 +1,10 @@
 package mshower.scoreboard;
 
-import mshower.scoreboard.commands.SimpleStatisticListCommand;
+import mshower.scoreboard.command.SimpleStatisticListCommand;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
 
-import java.io.IOException;
-
-import static mshower.scoreboard.SimpleStatisticList.MiningScoreboardObj;
-import static mshower.scoreboard.SimpleStatisticList.PlacingScoreboardObj;
-import static mshower.scoreboard.commands.SimpleStatisticListCommand.Config;
+import static mshower.scoreboard.SimpleStatisticList.*;
 
 public class SimpleStatisticListMod {
     public static void init() {

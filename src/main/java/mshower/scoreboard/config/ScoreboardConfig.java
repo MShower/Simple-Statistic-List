@@ -10,8 +10,6 @@ import java.util.Properties;
 public class ScoreboardConfig {
 
     public static final String CONFIG_FILE_NAME = "SimpleStatisticList.properties";
-    public static String key_mining_list_display_name = "MiningListDisplayName";
-    public static String key_placing_list_display_name = "PlacingListDisplayName";
     File file;
     public Properties ScoreboardProperties;
 
@@ -23,7 +21,8 @@ public class ScoreboardConfig {
                             "PlacingListDisplayName = PlacingList\n"+
                             "MiningListName = MiningList\n"+
                             "PlacingListName = PlacingList\n"+
-                            "DisplayMode = Cycle"; //Mining Placing Off Cycle
+                            "DisplayMode = Cycle\n"+ //Mining Placing Off Cycle
+                            "CycleDelay = 1200";
             writer.write(DEFAULT_CONFIG_DATA);
         } catch (Exception e) {
             SimpleStatisticList.LOGGER.warn("ERROR OCCURRED WHILE WRITING CONFIG.");

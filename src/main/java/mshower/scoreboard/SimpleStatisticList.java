@@ -1,13 +1,13 @@
 package mshower.scoreboard;
 
-import mshower.scoreboard.commands.SimpleStatisticListCommand;
+import mshower.scoreboard.command.SimpleStatisticListCommand;
 import mshower.scoreboard.config.ScoreboardConfig;
+import mshower.scoreboard.event.CycleScoreboardEvent;
 import mshower.scoreboard.event.HookPlayerBreakBlockEvent;
 import mshower.scoreboard.event.HookPlayerPlaceBlockEvent;
 import mshower.scoreboard.functions.CreateScoreboards;
 import net.fabricmc.api.ModInitializer;
 //#if MC < 11900
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 //#else
 //$$ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 //#endif
@@ -25,7 +25,6 @@ import org.apache.logging.log4j.Logger;
 import net.minecraft.scoreboard.*;
 
 //#if MC >= 11900
-import org.spongepowered.asm.mixin.transformer.Config;
 //#endif
 import java.io.File;
 
@@ -44,6 +43,7 @@ public class SimpleStatisticList implements ModInitializer
     public static Scoreboard StatisticListScoreboard;
     public static ScoreboardObjective MiningScoreboardObj;
     public static ScoreboardObjective PlacingScoreboardObj;
+    public static ScoreboardConfig Config;
 
     @Override
     public void onInitialize()
@@ -53,14 +53,14 @@ public class SimpleStatisticList implements ModInitializer
         MOD_VERSION = metadata.getVersion().getFriendlyString();
         FabricLoader loader = FabricLoader.getInstance();
         File config_file_path = loader.getConfigDir().toFile();
-        ScoreboardConfig config = new ScoreboardConfig(config_file_path.getPath());
-        String miningListDisplayName = config.GetValue("MiningListDisplayName");
-        String placingListDisplayName = config.GetValue("PlacingListDisplayName");
-        String miningListName = config.GetValue("MiningListName");
-        String placingListName = config.GetValue("PlacingListName");
+        Config = new ScoreboardConfig(config_file_path.getPath());
+        String miningListDisplayName = Config.GetValue("MiningListDisplayName");
+        String placingListDisplayName = Config.GetValue("PlacingListDisplayName");
+        String miningListName = Config.GetValue("MiningListName");
+        String placingListName = Config.GetValue("PlacingListName");
         HookPlayerBreakBlockEvent.hook();
         HookPlayerPlaceBlockEvent.hook();
-        SimpleStatisticListCommand.Config = new ScoreboardConfig(config_file_path.getPath());
+        CycleScoreboardEvent.register();
         CreateScoreboards.create(miningListName,placingListName,miningListDisplayName,placingListDisplayName);
 
         //#if MC<11900
