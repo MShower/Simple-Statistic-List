@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 
@@ -25,6 +26,7 @@ import static mshower.scoreboard.SimpleStatisticList.*;
 public class HookPlayerPlaceBlockEvent {
 
     public static void hook() {
+        //#if MC<12109
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
 
             //#if MC<11600
@@ -32,12 +34,10 @@ public class HookPlayerPlaceBlockEvent {
             //#else
             //$$ if (world.isClient()) return ActionResult.PASS;
             //#endif
-            //CANT COUNT REPLACING BLOCK
             ItemStack stack = player.getStackInHand(hand);
             if (stack.getItem() instanceof BlockItem) {
                 BlockItem blockItem = (BlockItem) stack.getItem();
                 BlockPos placePos = hitResult.getBlockPos().offset(hitResult.getSide());
-
                 Objects.requireNonNull(player.getServer()).execute(() -> {
                     if (world.getBlockState(placePos).getBlock() == blockItem.getBlock()) {
                         addPlacingScore((ServerPlayerEntity) player);
@@ -46,6 +46,20 @@ public class HookPlayerPlaceBlockEvent {
             }
             return ActionResult.PASS;
         });
+        //#else
+        //$$  UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
+        //$$     if (world.isClient()) return ActionResult.PASS;
+        //$$     if (!(player instanceof ServerPlayerEntity serverPlayer)) return ActionResult.PASS;
+        //$$     ItemStack stack = player.getStackInHand(hand);
+        //$$     if (stack.getItem() instanceof BlockItem) {
+        //$$          ServerWorld serverWorld = (ServerWorld) serverPlayer.getEntityWorld();
+        //$$         serverWorld.getServer().execute(() -> {
+        //$$             addPlacingScore(serverPlayer);
+        //$$         });
+        //$$     }
+        //$$     return ActionResult.PASS;
+        //$$ });
+        //#endif
     }
 
     private static void addPlacingScore(ServerPlayerEntity player) {
