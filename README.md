@@ -18,14 +18,14 @@ Perfect for servers that want to display and compare player activity.
     - Show placing stats
     - Rotate between both
     - Hide
-- ⚡ Supports multiple Minecraft versions (1.14.4 ~ 1.21.x)
+- ⚡ Supports multiple Minecraft versions (1.14.4 ~ 1.21.9)
 
 ---
 
 ## 📦 Installation
 1. Install [Fabric Loader](https://fabricmc.net/use/installer/).
 2. Install the [Fabric API](https://modrinth.com/mod/fabric-api).
-3. Download the latest `.jar` file from the [Releases](https://github.com/YOUR_NAME/Simple-Statistic-List/releases) or [Modrinth](https://modrinth.com/).
+3. Download the latest `.jar` file from the [Releases](https://github.com/YOUR_NAME/Simple-Statistic-List/releases) or [Modrinth](https://modrinth.com/mod/simple-statistic-list/versions).
 4. Place the `.jar` into your Minecraft `mods` folder.
 
 ---
