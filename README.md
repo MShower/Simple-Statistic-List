@@ -12,7 +12,7 @@ Perfect for servers that want to display and compare player activity.
 ## ✨ Features
 - 🪓 Count how many blocks a player has mined
 - 🧱 Count how many blocks a player has placed
-- 📊 Show results with the vanilla `/scoreboard` system
+- 📊 Show results with the vanilla scoreboard system
 - 🔄 Multiple display modes:
     - Show mining stats
     - Show placing stats
@@ -36,7 +36,7 @@ Perfect for servers that want to display and compare player activity.
 - Server admins can use commands like:
   ```mcfunction
   /simplestatisticlist display cycle
-  
+  ```
 ---
 
 ## 📜 License
