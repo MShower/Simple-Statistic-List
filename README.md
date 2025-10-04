@@ -35,8 +35,7 @@ Perfect for servers that want to display and compare player activity.
 - Stats are stored in the scoreboard system.
 - Server admins can use commands like:
   ```mcfunction
-  /scoreboard objectives list
-  /scoreboard players list <player>
+  /simplestatisticlist display cycle
   
 ---
 
