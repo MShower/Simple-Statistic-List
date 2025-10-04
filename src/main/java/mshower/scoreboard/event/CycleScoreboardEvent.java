@@ -15,14 +15,16 @@ import static mshower.scoreboard.SimpleStatisticList.Config;
 public class CycleScoreboardEvent {
     private static int tickCounter = 0;
     private static boolean toggleScoreboard = true;
+    private static boolean onStart = true;
     public static int cycleDelay;
 
     public static void register() {
         refreshCycleDelayFromConfig();
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             tickCounter++;
-            if (tickCounter >= cycleDelay) {
+            if (tickCounter >= cycleDelay && onStart) {
                 tickCounter = 0;
+                onStart = false;
                 if (Objects.equals(globalScoreboardDisplayMode, "Cycle")) {
                     if (toggleScoreboard) {
                         toggleScoreboard = false;

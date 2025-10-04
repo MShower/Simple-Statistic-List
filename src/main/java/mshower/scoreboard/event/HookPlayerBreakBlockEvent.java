@@ -10,24 +10,16 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 //$$ import net.minecraft.scoreboard.ScoreboardScore;
 //#else
 import net.minecraft.scoreboard.ScoreboardPlayerScore;
+import net.minecraft.server.network.ServerPlayerEntity;
 //#endif
 
 import static mshower.scoreboard.SimpleStatisticList.*;
+import static mshower.scoreboard.functions.AddScore.addScore;
 
 public class HookPlayerBreakBlockEvent {
     public static void hook() {
         PlayerBlockBreakEvents.AFTER.register(((world, player, pos, state, blockEntity) -> {
-            //#if MC < 12003
-            ScoreboardPlayerScore score = StatisticListScoreboard.getPlayerScore(player.getName().getString(), MiningScoreboardObj);
-            int player_score = score.getScore();
-            player_score++;
-            score.setScore(player_score);
-            //#else
-            //$$ ScoreAccess access = StatisticListScoreboard.getOrCreateScore(player, MiningScoreboardObj);
-            //$$ int score = access.getScore();
-            //$$ score++;
-            //$$ access.setScore(score);
-            //#endif
+            addScore(MiningScoreboardObj, (ServerPlayerEntity) player);
         }));
     }
 }

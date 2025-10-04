@@ -21,6 +21,7 @@ import net.minecraft.scoreboard.ScoreboardPlayerScore;
 import java.util.Objects;
 
 import static mshower.scoreboard.SimpleStatisticList.*;
+import static mshower.scoreboard.functions.AddScore.addScore;
 
 
 public class HookPlayerPlaceBlockEvent {
@@ -40,7 +41,7 @@ public class HookPlayerPlaceBlockEvent {
                 BlockPos placePos = hitResult.getBlockPos().offset(hitResult.getSide());
                 Objects.requireNonNull(player.getServer()).execute(() -> {
                     if (world.getBlockState(placePos).getBlock() == blockItem.getBlock()) {
-                        addPlacingScore((ServerPlayerEntity) player);
+                        addScore(PlacingScoreboardObj,(ServerPlayerEntity) player);
                     }
                 });
             }
@@ -54,25 +55,11 @@ public class HookPlayerPlaceBlockEvent {
         //$$     if (stack.getItem() instanceof BlockItem) {
         //$$          ServerWorld serverWorld = (ServerWorld) serverPlayer.getEntityWorld();
         //$$         serverWorld.getServer().execute(() -> {
-        //$$             addPlacingScore(serverPlayer);
+        //$$             addScore(PlacingScoreboardObj,(ServerPlayerEntity) player);
         //$$         });
         //$$     }
         //$$     return ActionResult.PASS;
         //$$ });
-        //#endif
-    }
-
-    private static void addPlacingScore(ServerPlayerEntity player) {
-        //#if MC < 12003
-        ScoreboardPlayerScore score = StatisticListScoreboard.getPlayerScore(player.getName().getString(), PlacingScoreboardObj);
-        int player_score = score.getScore();
-        player_score++;
-        score.setScore(player_score);
-        //#else
-        //$$ ScoreAccess access = StatisticListScoreboard.getOrCreateScore(player, PlacingScoreboardObj);
-        //$$ int score = access.getScore();
-        //$$ score++;
-        //$$ access.setScore(score);
         //#endif
     }
 }

@@ -17,8 +17,10 @@ public class ScoreboardConfig {
     private void CreateDefaultConfigFile(File file,
                                          String MiningListDisplayName,
                                          String PlacingListDisplayName,
+                                         String DeathListDisplayName,
                                          String MiningListName,
                                          String PlacingListName,
+                                         String DeathListName,
                                          String DisplayMode,
                                          Integer CycleDelay
     ) {
@@ -27,9 +29,11 @@ public class ScoreboardConfig {
             String DEFAULT_CONFIG_DATA =
                     "MiningListDisplayName = " + MiningListDisplayName +
                             "\nPlacingListDisplayName = " + PlacingListDisplayName +
+                            "\nDeathListDisplayName" + DeathListDisplayName +
                             "\nMiningListName = " + MiningListName +
                             "\nPlacingListName = " + PlacingListName +
-                            "\nDisplayMode = " + DisplayMode +//Mining Placing Off Cycle
+                            "\nDeathListName" + DeathListName +
+                            "\nDisplayMode = " + DisplayMode +//Mining Placing Death Off Cycle
                             "\nCycleDelay = " + CycleDelay;
             writer.write(DEFAULT_CONFIG_DATA);
         } catch (Exception e) {
@@ -41,7 +45,17 @@ public class ScoreboardConfig {
         if (!file.exists())
         {
             try {
-                CreateDefaultConfigFile(file, "MiningList", "PlacingList", "MiningList", "PlacingList", "Cycle", 1200);
+                CreateDefaultConfigFile(
+                        file,
+                        "MiningList",
+                        "PlacingList",
+                        "DeathList",
+                        "MiningList",
+                        "PlacingList",
+                        "DeathList",
+                        "Cycle",
+                        1200
+                );
             } catch (Exception e) {
                 SimpleStatisticList.LOGGER.warn("ERROR OCCURRED WHILE CREATING CONFIG.");
             }

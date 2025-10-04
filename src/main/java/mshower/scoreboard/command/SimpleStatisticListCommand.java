@@ -34,6 +34,13 @@ public class SimpleStatisticListCommand {
                                 throw new RuntimeException(e);
                             }
                         }))
+                        .then(literal("death").executes(ctx -> {
+                            try {
+                                return parseMulti("Death");
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }))
                         .then(literal("off").executes(ctx -> {
                             try {
                                 return parseMulti("Off");
@@ -47,7 +54,8 @@ public class SimpleStatisticListCommand {
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
-                        })))
+                        }))
+                )
         );
     }
 
@@ -61,6 +69,9 @@ public class SimpleStatisticListCommand {
             case "Placing":
                 MiningOrPlacing(PlacingScoreboardObj);
                 break;
+            case "Death":
+                //TODO
+                break;
             case "Off":
                 //#if MC<12002
                 StatisticListScoreboard.setObjectiveSlot(1, null);
@@ -69,7 +80,6 @@ public class SimpleStatisticListCommand {
                 //#endif
                 break;
             case "Cycle":
-                //TODO
                 break;
         }
         return 1;
@@ -98,6 +108,9 @@ public class SimpleStatisticListCommand {
             case "Placing":
                 MiningOrPlacing(PlacingScoreboardObj);
                 break;
+            case "Death":
+                //TODO
+                break;
             case "Off":
                 //#if MC<12002
                 StatisticListScoreboard.setObjectiveSlot(1, null);
@@ -106,7 +119,6 @@ public class SimpleStatisticListCommand {
                 //#endif
                 break;
             case "Cycle":
-                //TODO
                 break;
         }
     }

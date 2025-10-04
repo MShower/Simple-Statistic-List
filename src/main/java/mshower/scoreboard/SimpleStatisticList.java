@@ -4,6 +4,7 @@ import mshower.scoreboard.command.SimpleStatisticListCommand;
 import mshower.scoreboard.config.ScoreboardConfig;
 import mshower.scoreboard.event.CycleScoreboardEvent;
 import mshower.scoreboard.event.HookPlayerBreakBlockEvent;
+import mshower.scoreboard.event.HookPlayerDeadEvent;
 import mshower.scoreboard.event.HookPlayerPlaceBlockEvent;
 import mshower.scoreboard.functions.CreateScoreboards;
 import net.fabricmc.api.ModInitializer;
@@ -42,6 +43,7 @@ public class SimpleStatisticList implements ModInitializer
     public static Scoreboard StatisticListScoreboard;
     public static ScoreboardObjective MiningScoreboardObj;
     public static ScoreboardObjective PlacingScoreboardObj;
+    public static ScoreboardObjective DeathScoreboardObj;
     public static ScoreboardConfig Config;
 
     @Override
@@ -55,12 +57,15 @@ public class SimpleStatisticList implements ModInitializer
         Config = new ScoreboardConfig(config_file_path.getPath());
         String miningListDisplayName = Config.GetValue("MiningListDisplayName");
         String placingListDisplayName = Config.GetValue("PlacingListDisplayName");
+        String deathListDisplayName = Config.GetValue("DeathListDisplayName");
         String miningListName = Config.GetValue("MiningListName");
         String placingListName = Config.GetValue("PlacingListName");
+        String deathListName = Config.GetValue("DeathListDisplayName");
         HookPlayerBreakBlockEvent.hook();
         HookPlayerPlaceBlockEvent.hook();
+        HookPlayerDeadEvent.hook();
         CycleScoreboardEvent.register();
-        CreateScoreboards.create(miningListName,placingListName,miningListDisplayName,placingListDisplayName);
+        CreateScoreboards.create(miningListName,placingListName,deathListName,miningListDisplayName,placingListDisplayName,deathListDisplayName);
 
         //#if MC<11900
         //$$ net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> SimpleStatisticListCommand.register(dispatcher));
