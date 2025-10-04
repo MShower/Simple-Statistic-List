@@ -1,7 +1,6 @@
 package mshower.scoreboard.config;
 
 import mshower.scoreboard.SimpleStatisticList;
-import org.lwjgl.system.CallbackI;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -11,72 +10,71 @@ import java.util.Properties;
 public class ScoreboardConfig {
 
     public static final String CONFIG_FILE_NAME = "SimpleStatisticList.properties";
-    File file;
-    public Properties ScoreboardProperties;
+    private final File file;
+    public final Properties ScoreboardProperties;
+    private final Properties defaultProps;
 
-    private void CreateDefaultConfigFile(File file,
-                                         String MiningListDisplayName,
-                                         String PlacingListDisplayName,
-                                         String DeathListDisplayName,
-                                         String MiningListName,
-                                         String PlacingListName,
-                                         String DeathListName,
-                                         String DisplayMode,
-                                         Integer CycleDelay
-    ) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file)))
-        {
-            String DEFAULT_CONFIG_DATA =
-                    "MiningListDisplayName = " + MiningListDisplayName +
-                            "\nPlacingListDisplayName = " + PlacingListDisplayName +
-                            "\nDeathListDisplayName" + DeathListDisplayName +
-                            "\nMiningListName = " + MiningListName +
-                            "\nPlacingListName = " + PlacingListName +
-                            "\nDeathListName" + DeathListName +
-                            "\nDisplayMode = " + DisplayMode +//Mining Placing Death Off Cycle
-                            "\nCycleDelay = " + CycleDelay;
-            writer.write(DEFAULT_CONFIG_DATA);
-        } catch (Exception e) {
-            SimpleStatisticList.LOGGER.warn("ERROR OCCURRED WHILE WRITING CONFIG.");
-        }
-    }
     public ScoreboardConfig(final String filePath) {
         file = new File(filePath + File.separator + CONFIG_FILE_NAME);
-        if (!file.exists())
-        {
-            try {
-                CreateDefaultConfigFile(
-                        file,
-                        "MiningList",
-                        "PlacingList",
-                        "DeathList",
-                        "MiningList",
-                        "PlacingList",
-                        "DeathList",
-                        "Cycle",
-                        1200
-                );
-            } catch (Exception e) {
-                SimpleStatisticList.LOGGER.warn("ERROR OCCURRED WHILE CREATING CONFIG.");
-            }
+
+        defaultProps = new Properties();
+        defaultProps.setProperty("MiningListDisplayName", "MiningList");
+        defaultProps.setProperty("PlacingListDisplayName", "PlacingList");
+        defaultProps.setProperty("DeathListDisplayName", "DeathList");
+        defaultProps.setProperty("MiningListName", "MiningList");
+        defaultProps.setProperty("PlacingListName", "PlacingList");
+        defaultProps.setProperty("DeathListName", "DeathList");
+        defaultProps.setProperty("DisplayMode", "Cycle"); //Mining Placing Death Off Cycle
+        defaultProps.setProperty("CycleDelay", "1200");
+
+        if (!file.exists()) {
+            createConfigFileWithDefaults();
         }
 
-        this.ScoreboardProperties = new Properties();
-
-        try (Reader reader = new InputStreamReader(Files.newInputStream(file.toPath()),
-                StandardCharsets.UTF_8)) {
-            this.ScoreboardProperties.load(reader);
+        ScoreboardProperties = new Properties();
+        try (Reader reader = new InputStreamReader(Files.newInputStream(file.toPath()), StandardCharsets.UTF_8)) {
+            ScoreboardProperties.load(reader);
         } catch (Exception e) {
             SimpleStatisticList.LOGGER.warn("ERROR OCCURRED WHILE READING CONFIG.");
+        }
+
+        fillMissingDefaults();
+    }
+
+    private void createConfigFileWithDefaults() {
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(file.toPath()), StandardCharsets.UTF_8))) {
+            for (String key : defaultProps.stringPropertyNames()) {
+                writer.write(key + " = " + defaultProps.getProperty(key));
+                writer.newLine();
+            }
+        } catch (Exception e) {
+            SimpleStatisticList.LOGGER.warn("ERROR OCCURRED WHILE CREATING DEFAULT CONFIG.");
+        }
+    }
+
+    private void fillMissingDefaults() {
+        boolean changed = false;
+        for (String key : defaultProps.stringPropertyNames()) {
+            if (!ScoreboardProperties.containsKey(key)) {
+                ScoreboardProperties.setProperty(key, defaultProps.getProperty(key));
+                changed = true;
+            }
+        }
+        if (changed) {
+            try {
+                ScoreboardProperties.store(Files.newOutputStream(file.toPath()), null);
+            } catch (IOException e) {
+                SimpleStatisticList.LOGGER.warn("ERROR OCCURRED WHILE UPDATING CONFIG WITH DEFAULTS.");
+            }
         }
     }
 
     public String GetValue(final String key) {
-        return this.ScoreboardProperties.getProperty(key);
+        return ScoreboardProperties.getProperty(key);
     }
 
     public void UpdateValue(final String key, final String val) throws IOException {
-        this.ScoreboardProperties.setProperty(key, val);
-        this.ScoreboardProperties.store(Files.newOutputStream(this.file.toPath()), null);
+        ScoreboardProperties.setProperty(key, val);
+        ScoreboardProperties.store(Files.newOutputStream(file.toPath()), null);
     }
 }

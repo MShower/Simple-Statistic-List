@@ -1,7 +1,15 @@
 package mshower.scoreboard.functions;
 
-import net.minecraft.scoreboard.ScoreboardObjective;
+//#if MC>=12003
+//$$ import net.minecraft.nbt.NbtCompound;
+//$$ import net.minecraft.scoreboard.ReadableScoreboardScore;
+//$$ import net.minecraft.scoreboard.ScoreAccess;
+//$$ import net.minecraft.scoreboard.ScoreboardScore;
+//#else
 import net.minecraft.scoreboard.ScoreboardPlayerScore;
+//#endif
+
+import net.minecraft.scoreboard.ScoreboardObjective;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import static mshower.scoreboard.SimpleStatisticList.StatisticListScoreboard;

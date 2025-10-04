@@ -10,8 +10,9 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 //$$ import net.minecraft.scoreboard.ScoreboardScore;
 //#else
 import net.minecraft.scoreboard.ScoreboardPlayerScore;
-import net.minecraft.server.network.ServerPlayerEntity;
 //#endif
+
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import static mshower.scoreboard.SimpleStatisticList.*;
 import static mshower.scoreboard.functions.AddScore.addScore;

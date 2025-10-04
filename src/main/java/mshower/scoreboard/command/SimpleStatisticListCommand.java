@@ -1,8 +1,6 @@
 package mshower.scoreboard.command;
 
 import com.mojang.brigadier.CommandDispatcher;
-import mshower.scoreboard.SimpleStatisticList;
-import mshower.scoreboard.config.ScoreboardConfig;
 //#if MC>=12002
 //$$ import net.minecraft.scoreboard.ScoreboardDisplaySlot;
 //#endif
@@ -64,13 +62,13 @@ public class SimpleStatisticListCommand {
         setGlobalScoreboardDisplayMode(option);
         switch (globalScoreboardDisplayMode) {
             case "Mining":
-                MiningOrPlacing(MiningScoreboardObj);
+                generalSwitching(MiningScoreboardObj);
                 break;
             case "Placing":
-                MiningOrPlacing(PlacingScoreboardObj);
+                generalSwitching(PlacingScoreboardObj);
                 break;
             case "Death":
-                //TODO
+                generalSwitching(DeathScoreboardObj);
                 break;
             case "Off":
                 //#if MC<12002
@@ -84,13 +82,14 @@ public class SimpleStatisticListCommand {
         }
         return 1;
     }
-    public static void MiningOrPlacing(ScoreboardObjective objective) {
+    public static void generalSwitching(ScoreboardObjective objective) {
         //#if MC<12002
         StatisticListScoreboard.setObjectiveSlot(1, objective);
         //#else
         //$$ StatisticListScoreboard.setObjectiveSlot(ScoreboardDisplaySlot.SIDEBAR, objective);
         //#endif
     }
+
     public static void setGlobalScoreboardDisplayMode(String globalScoreboardDisplayMode) throws IOException {
         SimpleStatisticListCommand.globalScoreboardDisplayMode = globalScoreboardDisplayMode;
         Config.UpdateValue("DisplayMode", globalScoreboardDisplayMode);
@@ -103,13 +102,13 @@ public class SimpleStatisticListCommand {
     public static void onServerStarted() {
         switch (globalScoreboardDisplayMode) {
             case "Mining":
-                MiningOrPlacing(MiningScoreboardObj);
+                generalSwitching(MiningScoreboardObj);
                 break;
             case "Placing":
-                MiningOrPlacing(PlacingScoreboardObj);
+                generalSwitching(PlacingScoreboardObj);
                 break;
             case "Death":
-                //TODO
+                generalSwitching(DeathScoreboardObj);
                 break;
             case "Off":
                 //#if MC<12002

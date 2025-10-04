@@ -1,14 +1,12 @@
 package mshower.scoreboard.event;
 
-import mshower.scoreboard.config.ScoreboardConfig;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 
-import java.io.IOException;
 import java.util.Objects;
 
 import static mshower.scoreboard.SimpleStatisticList.MiningScoreboardObj;
 import static mshower.scoreboard.SimpleStatisticList.PlacingScoreboardObj;
-import static mshower.scoreboard.command.SimpleStatisticListCommand.MiningOrPlacing;
+import static mshower.scoreboard.command.SimpleStatisticListCommand.generalSwitching;
 import static mshower.scoreboard.command.SimpleStatisticListCommand.globalScoreboardDisplayMode;
 import static mshower.scoreboard.SimpleStatisticList.Config;
 
@@ -28,11 +26,11 @@ public class CycleScoreboardEvent {
                 if (Objects.equals(globalScoreboardDisplayMode, "Cycle")) {
                     if (toggleScoreboard) {
                         toggleScoreboard = false;
-                        MiningOrPlacing(MiningScoreboardObj);
+                        generalSwitching(MiningScoreboardObj);
                     }
                     else {
                         toggleScoreboard = true;
-                        MiningOrPlacing(PlacingScoreboardObj);
+                        generalSwitching(PlacingScoreboardObj);
                     }
                 }
             }
