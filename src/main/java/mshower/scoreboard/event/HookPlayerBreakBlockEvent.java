@@ -9,13 +9,12 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 //$$ import net.minecraft.scoreboard.ScoreboardObjective;
 //$$ import net.minecraft.scoreboard.ScoreboardScore;
 //#else
-import net.minecraft.scoreboard.ScoreboardPlayerScore;
 //#endif
 
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import static mshower.scoreboard.SimpleStatisticList.*;
-import static mshower.scoreboard.functions.AddScore.addScore;
+import static mshower.scoreboard.functions.Utils.addScore;
 
 public class HookPlayerBreakBlockEvent {
     public static void hook() {

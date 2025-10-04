@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static mshower.scoreboard.SimpleStatisticList.DeathScoreboardObj;
-import static mshower.scoreboard.functions.AddScore.addScore;
+import static mshower.scoreboard.functions.Utils.addScore;
 
 @Mixin(ServerPlayerEntity.class)
 public class ServerPlayerEntityMixin {

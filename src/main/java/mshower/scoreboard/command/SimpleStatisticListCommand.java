@@ -5,6 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 //$$ import net.minecraft.scoreboard.ScoreboardDisplaySlot;
 //#endif
 import com.mojang.brigadier.arguments.StringArgumentType;
+import mshower.scoreboard.functions.RemoveScoresWithSpecifiedPlayer;
 import net.minecraft.scoreboard.ScoreboardObjective;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
@@ -67,6 +68,15 @@ public class SimpleStatisticListCommand {
                                             String prefix = StringArgumentType.getString(ctx, "prefix");
                                             MinecraftServer server = ctx.getSource().getServer();
                                             return RemoveScoresWithPlayerPrefix.remove(server, prefix);
+                                        })
+                                )
+                        )
+                        .then(literal("removeScoresWithSpecifiedPlayer")
+                                .then(argument("player", StringArgumentType.word())
+                                        .executes(ctx -> {
+                                            String player = StringArgumentType.getString(ctx, "player");
+                                            MinecraftServer server = ctx.getSource().getServer();
+                                            return RemoveScoresWithSpecifiedPlayer.remove(server, player);
                                         })
                                 )
                         )

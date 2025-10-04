@@ -14,7 +14,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 
 import static mshower.scoreboard.SimpleStatisticList.StatisticListScoreboard;
 
-public class AddScore {
+public class Utils {
     public static void addScore(ScoreboardObjective scoreboardObj, ServerPlayerEntity player) {
         //#if MC < 12003
         ScoreboardPlayerScore score = StatisticListScoreboard.getPlayerScore(player.getName().getString(), scoreboardObj);
@@ -27,5 +27,8 @@ public class AddScore {
         //$$ score++;
         //$$ access.setScore(score);
         //#endif
+    }
+    public static String stripColor(String s) {
+        return s.replaceAll("§.", "");
     }
 }

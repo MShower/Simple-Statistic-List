@@ -4,6 +4,8 @@ import net.minecraft.scoreboard.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.text.Text;
 
+import static mshower.scoreboard.functions.Utils.stripColor;
+
 public class RemoveScoresWithPlayerPrefix {
     public static int remove(MinecraftServer server, String prefix) {
         if (prefix == null) {
@@ -44,9 +46,5 @@ public class RemoveScoresWithPlayerPrefix {
         //#endif
 
         return removed;
-    }
-
-    private static String stripColor(String s) {
-        return s.replaceAll("§.", "");
     }
 }

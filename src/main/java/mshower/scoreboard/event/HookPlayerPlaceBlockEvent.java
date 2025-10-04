@@ -15,13 +15,12 @@ import net.minecraft.server.network.ServerPlayerEntity;
 //$$ import net.minecraft.scoreboard.ScoreboardObjective;
 //$$ import net.minecraft.scoreboard.ReadableScoreboardScore;
 //#else
-import net.minecraft.scoreboard.ScoreboardPlayerScore;
 //#endif
 
 import java.util.Objects;
 
 import static mshower.scoreboard.SimpleStatisticList.*;
-import static mshower.scoreboard.functions.AddScore.addScore;
+import static mshower.scoreboard.functions.Utils.addScore;
 
 
 public class HookPlayerPlaceBlockEvent {
@@ -53,9 +52,9 @@ public class HookPlayerPlaceBlockEvent {
         //$$     if (!(player instanceof ServerPlayerEntity serverPlayer)) return ActionResult.PASS;
         //$$     ItemStack stack = player.getStackInHand(hand);
         //$$     if (stack.getItem() instanceof BlockItem) {
-        //$$          ServerWorld serverWorld = (ServerWorld) serverPlayer.getEntityWorld();
+        //$$         ServerWorld serverWorld = serverPlayer.getEntityWorld();
         //$$         serverWorld.getServer().execute(() -> {
-        //$$             addScore(PlacingScoreboardObj,(ServerPlayerEntity) player);
+        //$$             addScore(PlacingScoreboardObj, serverPlayer);
         //$$         });
         //$$     }
         //$$     return ActionResult.PASS;
