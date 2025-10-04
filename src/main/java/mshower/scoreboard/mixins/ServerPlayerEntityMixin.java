@@ -1,6 +1,5 @@
 package mshower.scoreboard.mixins;
 
-import mshower.scoreboard.SimpleStatisticList;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

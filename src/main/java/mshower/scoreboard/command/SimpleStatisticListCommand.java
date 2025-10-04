@@ -4,12 +4,18 @@ import com.mojang.brigadier.CommandDispatcher;
 //#if MC>=12002
 //$$ import net.minecraft.scoreboard.ScoreboardDisplaySlot;
 //#endif
+import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.scoreboard.ScoreboardObjective;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
+import mshower.scoreboard.functions.RemoveScoresWithPlayerPrefix;
+import net.minecraft.text.Text;
 
 import java.io.IOException;
+import java.util.List;
 
 import static mshower.scoreboard.SimpleStatisticList.*;
+import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class SimpleStatisticListCommand {
@@ -53,6 +59,17 @@ public class SimpleStatisticListCommand {
                                 throw new RuntimeException(e);
                             }
                         }))
+                )
+                .then(literal("method")
+                        .then(literal("removeScoresWithPrefixInPlayerName")
+                                .then(argument("prefix", StringArgumentType.word())
+                                        .executes(ctx -> {
+                                            String prefix = StringArgumentType.getString(ctx, "prefix");
+                                            MinecraftServer server = ctx.getSource().getServer();
+                                            return RemoveScoresWithPlayerPrefix.remove(server, prefix);
+                                        })
+                                )
+                        )
                 )
         );
     }
