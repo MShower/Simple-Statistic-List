@@ -127,8 +127,11 @@ java {
 
 jar {
 	from(rootProject.file('LICENSE')) {
-		rename { "${it}_${project.archives_base_name}" }
+		rename { "${it}" }
 	}
+    from(rootProject.file('NOTICE')) {
+        rename { "${it}" }
+    }
 }
 
 // configure the maven publication

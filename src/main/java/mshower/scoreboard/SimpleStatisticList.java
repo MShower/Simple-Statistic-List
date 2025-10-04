@@ -7,9 +7,8 @@ import mshower.scoreboard.event.HookPlayerBreakBlockEvent;
 import mshower.scoreboard.event.HookPlayerPlaceBlockEvent;
 import mshower.scoreboard.functions.CreateScoreboards;
 import net.fabricmc.api.ModInitializer;
-//#if MC < 11900
-//#else
-//$$ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+//#if MC >= 11900
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 //#endif
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.metadata.ModMetadata;
@@ -64,10 +63,9 @@ public class SimpleStatisticList implements ModInitializer
         CreateScoreboards.create(miningListName,placingListName,miningListDisplayName,placingListDisplayName);
 
         //#if MC<11900
-        // 注册命令以切换计分板的可见/隐藏状态
-        net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> SimpleStatisticListCommand.register(dispatcher));
+        //$$ net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> SimpleStatisticListCommand.register(dispatcher));
         //#else
-        //$$ CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> SimpleStatisticListCommand.register(dispatcher));
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> SimpleStatisticListCommand.register(dispatcher));
         //#endif
         SimpleStatisticListMod.init();
 

@@ -65,8 +65,4 @@ public class ScoreboardConfig {
         this.ScoreboardProperties.setProperty(key, val);
         this.ScoreboardProperties.store(Files.newOutputStream(this.file.toPath()), null);
     }
-
-    public static void UpdateConfig() {
-        //TODO
-    }
 }
