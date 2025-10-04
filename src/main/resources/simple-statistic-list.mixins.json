@@ -1,13 +1,14 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "mshower.scoreboard.mixins",
-  "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
-  "mixins": [
-  ],
-  "client": [
-  ],
-  "injectors": {
-    "defaultRequire": 1
+    "required": true,
+    "minVersion": "0.8",
+    "package": "mshower.scoreboard.mixins",
+    "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
+    "mixins": [
+        "ServerPlayerEntityMixin"
+    ],
+    "client": [
+    ],
+    "injectors": {
+        "defaultRequire": 1
   }
 }

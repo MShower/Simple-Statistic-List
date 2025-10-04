@@ -4,7 +4,6 @@ import mshower.scoreboard.command.SimpleStatisticListCommand;
 import mshower.scoreboard.config.ScoreboardConfig;
 import mshower.scoreboard.event.CycleScoreboardEvent;
 import mshower.scoreboard.event.HookPlayerBreakBlockEvent;
-import mshower.scoreboard.event.HookPlayerDeadEvent;
 import mshower.scoreboard.event.HookPlayerPlaceBlockEvent;
 import mshower.scoreboard.functions.CreateScoreboards;
 import net.fabricmc.api.ModInitializer;
@@ -63,7 +62,7 @@ public class SimpleStatisticList implements ModInitializer
         String deathListName = Config.GetValue("DeathListDisplayName");
         HookPlayerBreakBlockEvent.hook();
         HookPlayerPlaceBlockEvent.hook();
-        HookPlayerDeadEvent.hook();
+        //HookPlayerDeadEvent.hook();
         CycleScoreboardEvent.register();
         CreateScoreboards.create(miningListName,placingListName,deathListName,miningListDisplayName,placingListDisplayName,deathListDisplayName);
 
