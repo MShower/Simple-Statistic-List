@@ -16,7 +16,7 @@ public class RemoveScoresWithPlayerSuffix {
         String cleanSuffix = stripColor(suffix).toLowerCase();
         Scoreboard scoreboard = server.getScoreboard();
 
-        //#if MC>=12100
+        //#if MC>=12004
         //$$ for (ScoreboardObjective objective : scoreboard.getObjectives()) {
         //$$    for (ScoreboardEntry entry : scoreboard.getScoreboardEntries(objective)) {
         //$$        Text nameText = entry.name();
@@ -32,7 +32,7 @@ public class RemoveScoresWithPlayerSuffix {
         //$$        }
         //$$    }
         //$$}
-        //#else
+        //#elseif MC<=1.20.1
         for (ScoreboardObjective objective : scoreboard.getObjectives()) {
             for (ScoreboardPlayerScore s : scoreboard.getAllPlayerScores(objective)) {
                 String holderName = s.getPlayerName();

@@ -16,7 +16,7 @@ public class RemoveScoresWithPlayerPrefix {
         String cleanPrefix = stripColor(prefix).toLowerCase();
         Scoreboard scoreboard = server.getScoreboard();
 
-        //#if MC>=12100
+        //#if MC>=12004
         //$$ for (ScoreboardObjective objective : scoreboard.getObjectives()) {
         //$$    for (ScoreboardEntry entry : scoreboard.getScoreboardEntries(objective)) {
         //$$        Text nameText = entry.name();
@@ -32,7 +32,7 @@ public class RemoveScoresWithPlayerPrefix {
         //$$        }
         //$$    }
         //$$}
-        //#else
+        //#elseif MC<=1.20.1
         for (ScoreboardObjective objective : scoreboard.getObjectives()) {
             for (ScoreboardPlayerScore s : scoreboard.getAllPlayerScores(objective)) {
                 String holderName = s.getPlayerName();
@@ -43,6 +43,8 @@ public class RemoveScoresWithPlayerPrefix {
                 }
             }
         }
+        //#else
+        //TODO
         //#endif
 
         return removed;
