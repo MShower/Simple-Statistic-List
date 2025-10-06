@@ -18,10 +18,10 @@ public class LivingEntityMixin {
         LivingEntity self = (LivingEntity) (Object) this;
         //#if MC<12108
         if (!self.getEntityWorld().isClient) {
-        //#elseif MC=12108
-        //$$ if (!self.getWorld().isClient) {
-        //#else
+        //#elseif MC>12108
         //$$ if (!self.getEntityWorld().isClient()) {
+        //#else
+        //$$ if (!self.getWorld().isClient) {
         //#endif
             if (source.getAttacker() instanceof ServerPlayerEntity) {
                 ServerPlayerEntity player = (ServerPlayerEntity) source.getAttacker();
