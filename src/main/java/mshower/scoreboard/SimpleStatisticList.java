@@ -43,6 +43,7 @@ public class SimpleStatisticList implements ModInitializer
     public static ScoreboardObjective MiningScoreboardObj;
     public static ScoreboardObjective PlacingScoreboardObj;
     public static ScoreboardObjective DeathScoreboardObj;
+    public static ScoreboardObjective KillEntityScoreboardObj;
     public static ScoreboardConfig Config;
 
     @Override
@@ -57,14 +58,15 @@ public class SimpleStatisticList implements ModInitializer
         String miningListDisplayName = Config.GetValue("MiningListDisplayName");
         String placingListDisplayName = Config.GetValue("PlacingListDisplayName");
         String deathListDisplayName = Config.GetValue("DeathListDisplayName");
+        String killEntityListDisplayName = Config.GetValue("KillEntityListDisplayName");
         String miningListName = Config.GetValue("MiningListName");
         String placingListName = Config.GetValue("PlacingListName");
-        String deathListName = Config.GetValue("DeathListDisplayName");
+        String deathListName = Config.GetValue("DeathListName");
+        String killEntityListName = Config.GetValue("KillEntityListName");
         HookPlayerBreakBlockEvent.hook();
         HookPlayerPlaceBlockEvent.hook();
-        //HookPlayerDeadEvent.hook();
         CycleScoreboardEvent.register();
-        CreateScoreboards.create(miningListName,placingListName,deathListName,miningListDisplayName,placingListDisplayName,deathListDisplayName);
+        CreateScoreboards.create(miningListName, placingListName, deathListName, killEntityListName, miningListDisplayName, placingListDisplayName, deathListDisplayName, killEntityListDisplayName);
 
         //#if MC<11900
         //$$ net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> SimpleStatisticListCommand.register(dispatcher));

@@ -4,6 +4,7 @@
     "package": "mshower.scoreboard.mixins",
     "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
     "mixins": [
+        "LivingEntityMixin",
         "ServerPlayerEntityMixin"
     ],
     "client": [

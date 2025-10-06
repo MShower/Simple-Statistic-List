@@ -21,10 +21,12 @@ public class ScoreboardConfig {
         defaultProps.setProperty("MiningListDisplayName", "MiningList");
         defaultProps.setProperty("PlacingListDisplayName", "PlacingList");
         defaultProps.setProperty("DeathListDisplayName", "DeathList");
+        defaultProps.setProperty("KillEntityListDisplayName", "KillEntityList");
         defaultProps.setProperty("MiningListName", "MiningList");
         defaultProps.setProperty("PlacingListName", "PlacingList");
         defaultProps.setProperty("DeathListName", "DeathList");
-        defaultProps.setProperty("DisplayMode", "Cycle"); //Mining Placing Death Off Cycle
+        defaultProps.setProperty("KillEntityListName", "KillEntityList");
+        defaultProps.setProperty("DisplayMode", "Cycle"); //Mining Placing Death KillEntity Off Cycle
         defaultProps.setProperty("CycleDelay", "1200");
 
         if (!file.exists()) {

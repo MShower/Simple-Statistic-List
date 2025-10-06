@@ -23,7 +23,7 @@ import java.util.Objects;
 import static mshower.scoreboard.SimpleStatisticList.*;
 
 public class CreateScoreboards {
-    public static void create(final String mining_name, final String placing_name, final String death_name, final String mining_display_name, final String placing_display_name, final String death_display_name) {
+    public static void create(final String mining_name, final String placing_name, final String death_name, final String kill_entity_name, final String mining_display_name, final String placing_display_name, final String death_display_name, final String kill_entity_display_name) {
         ServerLifecycleEvents.SERVER_STARTED.register(server -> {
             ServerWorld overworld;
             //#if MC < 11600
@@ -98,6 +98,29 @@ public class CreateScoreboards {
                 //$$ DeathScoreboardObj.setDisplayName(new LiteralText(death_display_name));
                 //#elseif MC>=12003
                 DeathScoreboardObj.setDisplayName(Text.literal(death_display_name));
+                //#endif
+            }
+
+            KillEntityScoreboardObj = StatisticListScoreboard.getNullableObjective(kill_entity_name);
+            if (KillEntityScoreboardObj == null) {
+                //#if MC<11900
+                //$$ KillEntityScoreboardObj = StatisticListScoreboard.addObjective(kill_entity_name, ScoreboardCriterion.DUMMY, new LiteralText(kill_entity_display_name), ScoreboardCriterion.RenderType.INTEGER);
+                //#elseif MC>=11900 && MC<12003
+                KillEntityScoreboardObj = StatisticListScoreboard.addObjective(kill_entity_name, ScoreboardCriterion.DUMMY, Text.literal(kill_entity_display_name), ScoreboardCriterion.RenderType.INTEGER);
+                //#elseif MC>=12003
+                //$$KillEntityScoreboardObj = StatisticListScoreboard.addObjective(kill_entity_name, ScoreboardCriterion.DUMMY, Text.literal(kill_entity_display_name), ScoreboardCriterion.RenderType.INTEGER, true, null);
+                //#endif
+
+                //#if MC<12002
+                StatisticListScoreboard.setObjectiveSlot(1, null);
+                //#else
+                //$$ StatisticListScoreboard.setObjectiveSlot(ScoreboardDisplaySlot.SIDEBAR, null);
+                //#endif
+            }else{
+                //#if MC<11900
+                //$$ KillEntityScoreboardObj.setDisplayName(new LiteralText(kill_entity_display_name));
+                //#elseif MC>=12003
+                KillEntityScoreboardObj.setDisplayName(Text.literal(kill_entity_display_name));
                 //#endif
             }
         });

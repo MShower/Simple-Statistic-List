@@ -32,7 +32,7 @@ public class RemoveScoresWithPlayerSuffix {
         //$$        }
         //$$    }
         //$$}
-        //#elseif MC<=1.20.1
+        //#else
         for (ScoreboardObjective objective : scoreboard.getObjectives()) {
             for (ScoreboardPlayerScore s : scoreboard.getAllPlayerScores(objective)) {
                 String holderName = s.getPlayerName();

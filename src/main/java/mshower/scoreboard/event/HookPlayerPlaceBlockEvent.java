@@ -21,6 +21,7 @@ import java.util.Objects;
 
 import static mshower.scoreboard.SimpleStatisticList.*;
 import static mshower.scoreboard.functions.Utils.addScore;
+import static mshower.scoreboard.functions.Utils.isClient;
 
 
 public class HookPlayerPlaceBlockEvent {
@@ -29,11 +30,7 @@ public class HookPlayerPlaceBlockEvent {
         //#if MC<12109
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
 
-            //#if MC<11600
-            if (world.isClient) return ActionResult.PASS;
-            //#else
-            //$$ if (world.isClient()) return ActionResult.PASS;
-            //#endif
+            if (isClient(world)) return ActionResult.PASS;
             ItemStack stack = player.getStackInHand(hand);
             if (stack.getItem() instanceof BlockItem) {
                 BlockItem blockItem = (BlockItem) stack.getItem();
@@ -48,7 +45,7 @@ public class HookPlayerPlaceBlockEvent {
         });
         //#else
         //$$  UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
-        //$$     if (world.isClient()) return ActionResult.PASS;
+        //$$     if (isClient(world)) return ActionResult.PASS;
         //$$     if (!(player instanceof ServerPlayerEntity serverPlayer)) return ActionResult.PASS;
         //$$     ItemStack stack = player.getStackInHand(hand);
         //$$     if (stack.getItem() instanceof BlockItem) {

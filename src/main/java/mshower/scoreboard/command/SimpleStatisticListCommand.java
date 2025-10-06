@@ -47,6 +47,13 @@ public class SimpleStatisticListCommand {
                                 throw new RuntimeException(e);
                             }
                         }))
+                        .then(literal("killEntity").executes(ctx -> {
+                            try {
+                                return parseMulti("KillEntity");
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }))
                         .then(literal("off").executes(ctx -> {
                             try {
                                 return parseMulti("Off");
@@ -106,6 +113,9 @@ public class SimpleStatisticListCommand {
                 break;
             case "Death":
                 generalSwitching(DeathScoreboardObj);
+                break;
+            case "KillEntity":
+                generalSwitching(KillEntityScoreboardObj);
                 break;
             case "Off":
                 //#if MC<12002

@@ -29,7 +29,7 @@ public class RemoveScoresWithSpecifiedPlayer {
         //$$         }
         //$$     }
         //$$ }
-        //#elseif MC<1.20.4
+        //#else
         for (ScoreboardObjective objective : scoreboard.getObjectives()) {
             for (ScoreboardPlayerScore s : scoreboard.getAllPlayerScores(objective)) {
                 String holderName = s.getPlayerName();
