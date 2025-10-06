@@ -16,10 +16,10 @@ public class LivingEntityMixin {
     @Inject(method = "onDeath", at = @At("HEAD"))
     private void onDeathInject(DamageSource source, CallbackInfo ci) {
         LivingEntity self = (LivingEntity) (Object) this;
-        //#if MC<12109
-        //$$ if (!self.getEntityWorld().isClient) {
+        //#if MC<=12108
+        if (!self.getWorld().isClient) {
         //#else
-        if (!self.getEntityWorld().isClient()) {
+        //$$ if (!self.getEntityWorld().isClient()) {
         //#endif
             if (source.getAttacker() instanceof ServerPlayerEntity) {
                 ServerPlayerEntity player = (ServerPlayerEntity) source.getAttacker();
