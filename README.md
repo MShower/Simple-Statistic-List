@@ -31,7 +31,7 @@ Perfect for servers that want to display and compare player activity.
 ---
 
 ## ⚙️ Usage
-- The mod automatically tracks **block placing** and **block mining** when players are in-game.
+- The mod automatically tracks many statistics when players are in-game.
 - Stats are stored in the scoreboard system.
 - Server admins can use commands like:
   ```mcfunction
