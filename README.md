@@ -12,11 +12,12 @@ Perfect for servers that want to display and compare player activity.
 ## ✨ Features
 - 🪓 Count how many blocks a player has mined
 - 🧱 Count how many blocks a player has placed
+- ⚔️ Count how many entities a player has killed
+- ☠️ Count how many times a player has dead
 - 📊 Show results with the vanilla scoreboard system
 - 🔄 Multiple display modes:
-    - Show mining stats
-    - Show placing stats
-    - Rotate between both
+    - Show single scoreboard
+    - Rotate among several scoreboards
     - Hide
 - ⚡ Supports multiple Minecraft versions (1.14.4 ~ 1.21.9)
 
@@ -37,6 +38,11 @@ Perfect for servers that want to display and compare player activity.
   ```mcfunction
   /simplestatisticlist display cycle
   ```
+- You can also use methods like
+- ```mcfunction
+  /simplestatisticlist method removeScoresWithSuffixInPlayerName bot_
+  ```
+- to batch process some operations related to scoreboards.
 ---
 
 ## 📜 License
