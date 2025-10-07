@@ -4,7 +4,7 @@
 ![Loader](https://img.shields.io/badge/Loader-Fabric-blue)
 ![License](https://img.shields.io/badge/License-MIT-purple)
 
-A lightweight Fabric mod that tracks player **block mining** ， **block placing** and many other statistics, integrating them with Minecraft’s **scoreboard system**.  
+A lightweight Fabric mod that tracks player **block mining**, **block placing** and many other statistics, integrating them with Minecraft’s **scoreboard system**.  
 Perfect for servers that want to display and compare player activity.
 
 ---
