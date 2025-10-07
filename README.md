@@ -39,7 +39,7 @@ Perfect for servers that want to display and compare player activity.
   /simplestatisticlist display cycle
   ```
 - You can also use methods like
-- ```mcfunction
+  ```mcfunction
   /simplestatisticlist method removeScoresWithSuffixInPlayerName bot_
   ```
 - to batch process some operations related to scoreboards.
