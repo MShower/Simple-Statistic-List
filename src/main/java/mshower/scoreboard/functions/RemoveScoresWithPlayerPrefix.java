@@ -43,8 +43,6 @@ public class RemoveScoresWithPlayerPrefix {
                 }
             }
         }
-        //#else
-        //TODO
         //#endif
 
         return removed;

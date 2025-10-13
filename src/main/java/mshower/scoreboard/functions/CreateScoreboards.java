@@ -1,3 +1,9 @@
+/*
+* Part of the code used TheStarryMiningList's code, and the original file:
+* https://github.com/crackun24/TheStarryMiningList/blob/master/src/main/java/com/mininglist/thestarrymininglist/function/CreateScoreboard.java
+* This part of the code follows LGPL.
+*/
+
 package mshower.scoreboard.functions;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
