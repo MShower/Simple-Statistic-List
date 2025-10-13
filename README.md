@@ -4,7 +4,7 @@
 ![Loader](https://img.shields.io/badge/Loader-Fabric-blue)
 ![License](https://img.shields.io/badge/License-MIT-purple)
 
-A lightweight Fabric mod that tracks player **block mining** and **block placing** statistics, integrating them with Minecraft’s **scoreboard system**.  
+A lightweight Fabric mod that tracks player **block mining**, **block placing** and many other statistics, integrating them with Minecraft’s **scoreboard system**.  
 Perfect for servers that want to display and compare player activity.
 
 ---
@@ -12,11 +12,12 @@ Perfect for servers that want to display and compare player activity.
 ## ✨ Features
 - 🪓 Count how many blocks a player has mined
 - 🧱 Count how many blocks a player has placed
+- ⚔️ Count how many entities a player has killed
+- ☠️ Count how many times a player has dead
 - 📊 Show results with the vanilla scoreboard system
 - 🔄 Multiple display modes:
-    - Show mining stats
-    - Show placing stats
-    - Rotate between both
+    - Show single scoreboard
+    - Rotate among several scoreboards
     - Hide
 - ⚡ Supports multiple Minecraft versions (1.14.4 ~ 1.21.9)
 
@@ -31,12 +32,17 @@ Perfect for servers that want to display and compare player activity.
 ---
 
 ## ⚙️ Usage
-- The mod automatically tracks **block placing** and **block mining** when players are in-game.
+- The mod automatically tracks many statistics when players are in-game.
 - Stats are stored in the scoreboard system.
 - Server admins can use commands like:
   ```mcfunction
   /simplestatisticlist display cycle
   ```
+- You can also use methods like
+  ```mcfunction
+  /simplestatisticlist method removeScoresWithSuffixInPlayerName bot_
+  ```
+- to batch process some operations related to scoreboards.
 ---
 
 ## 📜 License
